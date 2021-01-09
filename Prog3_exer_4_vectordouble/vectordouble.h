@@ -9,10 +9,11 @@
 #define vectordouble_h
 
 
+template <class T>
 class Vector{
 private:
     int vectorDimension;
-    double* vectorArr;
+    T* vectorArr;
     
 public:
     //! Vector which parameter is not specified. Vector size will be set 2.
@@ -20,12 +21,12 @@ public:
     //! Vector with vectorDimension parameter. Here, initial values of the vector shall be 0
     Vector(int vectorDimension);
     //! Vector with vectorDimension and values as parameters
-    Vector(int vectorDimension, double * values);
+    Vector(int vectorDimension, T * values);
     //! Copy Constructor (Deep copy)
     //Vector(const Vector & vectorObj);
     Vector(const Vector & vectorObj);
     //! Set value at the specified index i
-    void setValueAt(int index, double value);
+    void setValueAt(int index, T value);
     //! Read value at the specified index i
     double getValueAt(int index);
     //! Destructor. To release memory on the heap
