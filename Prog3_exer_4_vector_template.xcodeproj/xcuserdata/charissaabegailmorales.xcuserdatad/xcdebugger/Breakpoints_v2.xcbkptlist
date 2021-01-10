@@ -3,4 +3,24 @@
    uuid = "35858E5F-F0CB-4DD1-814A-99FACA72ACA5"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DECFDACE-8161-4597-9854-E9AE7F03720B"
+            shouldBeEnabled = "No"
+            nameForDebugger = "display"
+            condition = "vt_double3-&gt;display()"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prog3_exer_4_vector_template/main.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "main(argc, argv)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

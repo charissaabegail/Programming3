@@ -25,6 +25,7 @@ private:
 public:
     //! The class should provide default constructor
     vectorTemplate();
+
     
     //! Constructor, that assigns a given value to a given number of vector elements.
     vectorTemplate(size_t size);
@@ -44,7 +45,7 @@ public:
     
     
     //! overload index operator
-    vectorTemplate<T>& operator[ ](std::size_t index);
+    T& operator[ ](std::size_t index);
     
     //! overload index operator with constant vector
     //const T& operator[ ](std::size_t index) const;     
@@ -54,6 +55,8 @@ public:
     
     //! overload output opertaor
     void display();
+    
+    void display() const;
     
     //! remove
     void remove(size_t index); //why the value of index is size_t>
@@ -69,6 +72,8 @@ public:
     
     
 };
+
+
 
 
 //inline functions
@@ -114,14 +119,14 @@ void vectorTemplate<T>::resize(size_t newSize){
     T* original_vectorValues = this->vectorValues;
     
     //! dynamically allocate new memory
-    this->vectorValues = new T[newSize];
-    for(size_t i = 0; i <= original_size; i++){
+    this->size += newSize;
+    this->vectorValues = new T[this->size];
+    for(size_t i = 0; i < original_size; i++){
         this->vectorValues[i] = original_vectorValues[i];
     }
     
     //! release temporary memory
     delete[] original_vectorValues;
-    
 };
 
 //! swap: swaps two vectors (swapping administrative data is enough!! No need to copy all vectorValues!)
@@ -130,7 +135,7 @@ void vectorTemplate<T>::swap(vectorTemplate<T> &vec2){
     //! check if swappable or same size;
     T temp;
     if(this->size == vec2.size) {
-        for(size_t i = 0; i <= this->size; i++){
+        for(size_t i = 0; i < this->size; i++){
             temp = this->vectorValues[i];
             this->vectorValues[i] = vec2[i];
             vec2[i] = temp;
@@ -141,7 +146,7 @@ void vectorTemplate<T>::swap(vectorTemplate<T> &vec2){
 
 //! overload index operator
 template <class T>
-vectorTemplate<T>& vectorTemplate<T>::operator[ ](std::size_t index) {
+T& vectorTemplate<T>::operator[ ](std::size_t index) {
     //! check if index is valid
     if(index >= this->size || index < 0 ) {
         throw std::out_of_range("index out of range");
@@ -193,6 +198,15 @@ void vectorTemplate<T>::display(){
     //std::cout << " ----- end of output ------ \n" << std::endl;
 }
 
+template <class T>
+void vectorTemplate<T>::display() const{
+    //std::cout << " ----- vector contents ---- \n" << std::endl;
+    for(size_t i = 0; i < this->size; i++){
+        std::cout << this->vectorValues[i] << "\n" << std::endl;
+    }
+    //std::cout << " ----- end of output ------ \n" << std::endl;
+}
+
 //! remove
 template <class T>
 void vectorTemplate<T>::remove(size_t index) {
@@ -221,24 +235,19 @@ void vectorTemplate<T>::remove(size_t index) {
 //! insert
 template <class T>
 void vectorTemplate<T>::insert(const vectorTemplate<T>& vector, size_t index){
-    //! validate index
-    if(index >= this->size) {
-        //adjust size automatically when there's no space
-        resize(this->size + vector.size);
-    } else if (index < 0 ) {
-        throw std::out_of_range("index is out of range");
-        return;
-    }
-    
     //save original size
     size_t original_size = this->size;
+
+    //! validate index
+    if(index >= this->size) {
+        throw std::out_of_range("index is out of range");
+    }
     
-    //resize vector
-    resize(vector.size);
-    
+    //!adjust size automatically when there's no space
+        resize(vector.size);
     //shift to the right
-    for(size_t i = original_size; i >= index;){
-        this->vectorValues[i+vector.size] = this->vectorValues[i];
+    for(size_t i = original_size-1; i >= index;){
+        this->vectorValues[i + vector.size] = this->vectorValues[i];
         if(i > 0) {
             --i;
         } else {
@@ -250,6 +259,7 @@ void vectorTemplate<T>::insert(const vectorTemplate<T>& vector, size_t index){
     for(size_t i = index, j=0 ; j < vector.size; j++, i++){
         this->vectorValues[i] = vector.vectorValues[j];
     }
+    
 };
 
 //! release
