@@ -54,8 +54,7 @@ int main(int argc, const char * argv[]) {
     
     std::cout << result << std::endl;
     // insert code here...
-    std::cout << "change3";
-    std::cout << "change4";
+
     std::cout << "Hello, World!\n";
     return 0;
 }
