@@ -55,6 +55,7 @@ int main(int argc, const char * argv[]) {
     std::cout << result << std::endl;
     // insert code here...
 
+    std::cout << "initial commit";
     std::cout << "Hello, World!\n";
     return 0;
 }
